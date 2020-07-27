@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+
+<heah>
+
+    <title>Desafio</title>
+    <!--CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!--Icones Google-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+
+
+</heah>
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-light bg-light">
+            <span class="navbar-brand mb-0 h1" style="font-weight: bold;">Desafio Dígito Unico</span>
+        </nav>
+    </header>
+
+    <section>
+        <div class="container" style="width:60%; padding-bottom: 30px;">
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" style="background-color: white; padding-left: 0px;">
+                    <li class="breadcrumb-item" aria-current="page"><a href="/usuarios">Usuários</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Editar usuário</li>
+                </ol>
+            </nav>
+
+            <div>
+                <form method="post">
+                    <input type="hidden" name="id" th:value="${usuario.id}">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="nome" th:value="${usuario.nome}">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="email" th:value="${usuario.email}">
+                    </div>
+
+                    <small class="form-text text-muted">(*) Campos obrigatórios</small>
+
+                    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Salvar</button>
+                    <a href="/usuarios" class="btn btn-light" role="button" style="margin-top: 10px;">Cancelar</a>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+
+</body>
+
+</html>
