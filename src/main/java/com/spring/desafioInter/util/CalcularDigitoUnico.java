@@ -1,5 +1,8 @@
 package com.spring.desafioInter.util;
 
+import com.spring.desafioInter.model.Calculo;
+
+import java.util.ArrayList;
 import java.util.stream.LongStream;
 
 public class CalcularDigitoUnico {
