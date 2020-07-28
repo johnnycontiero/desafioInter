@@ -8,7 +8,7 @@ public class CacheCalculos {
         this.tamanho = 0;
     }
 
-    int TAMANHO_MAXIMO = 2;
+    int TAMANHO_MAXIMO = 10;
     Calculo[] calculosRealizados = new Calculo[TAMANHO_MAXIMO];
     int tamanho;
 
