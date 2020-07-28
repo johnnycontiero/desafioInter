@@ -25,16 +25,16 @@ public class DesafioController {
 
     CacheCalculos cache = new CacheCalculos();
 
-    @RequestMapping("/")
+    @GetMapping(path = {"/"})
     public String index(){
-        return "index";
+        return "redirect:/usuarios";
     }
 
     /**
      * Obtém lista de usuários
      * @return ModelAndView
      */
-    @RequestMapping(value = "/usuarios", method = RequestMethod.GET)
+    @GetMapping(path = {"/usuarios"})
     public ModelAndView getUsuarios(){
         ModelAndView mv = new ModelAndView( "usuarios");
         List<Usuario> usuarios = desafioService.finAllUsers();
@@ -47,7 +47,7 @@ public class DesafioController {
      * @param id Identificação do usuário
      * @return ModelAndView
      */
-    @RequestMapping(value = "/usuario/{id}", method = RequestMethod.GET)
+    @GetMapping(path = {"/usuarios/{id}"})
     public ModelAndView getDetalhesUsuario(@PathVariable("id") Long id){
         ModelAndView mv = new ModelAndView( "detalhesUsuario");
         Usuario usuario = desafioService.findUserById(id);
@@ -59,7 +59,7 @@ public class DesafioController {
      * Direciona para pagina de cadastro de usuário
      * @return pagina destino
      */
-    @RequestMapping( value = "/newUsuario", method = RequestMethod.GET)
+    @GetMapping(path = {"/newUsuario"})
     public String getInserirUsuarioForm(){
         return "inserirUsuario";
     }
@@ -69,7 +69,7 @@ public class DesafioController {
      * @param usuario
      * @return redireciona pagina de usuarios
      */
-    @RequestMapping( value = "/newUsuario", method = RequestMethod.POST)
+    @PostMapping(value="/newUsuario")
     public String salvarUsuario(@Valid @ModelAttribute Usuario usuario){
         desafioService.saveUser(usuario);
         return "redirect:/usuarios";
@@ -80,7 +80,7 @@ public class DesafioController {
      * @param id Identificação do usuário
      * @return redireciona pagina de usuarios
      */
-    @RequestMapping(value = "/excluirUsuario/{id}", method = RequestMethod.GET)
+    @GetMapping(path = {"/excluirUsuario/{id}"})
     public String getExcluirUsuario(@PathVariable("id") Long id){
         desafioService.deleteUser(id);
         return "redirect:/usuarios";
@@ -90,7 +90,7 @@ public class DesafioController {
      * Direciona para pagina de editar cadastro de usuário
      * @return pagina destino
      */
-    @RequestMapping(value = "/editarUsuario/{id}", method = RequestMethod.GET)
+    @GetMapping(path = {"/editarUsuario/{id}"})
     public ModelAndView getEditarUsuario(@PathVariable("id") Long id){
         ModelAndView mv = new ModelAndView( "editarUsuario");
         Usuario usuario = desafioService.findUserById(id);
@@ -103,7 +103,7 @@ public class DesafioController {
      * @param usuario
      * @return redireciona pagina de usuarios
      */
-    @RequestMapping(value = "/editarUsuario/{id}", method = RequestMethod.POST)
+    @PostMapping(value="/editarUsuario/{id}")
     public String editarUsuario(@Valid @ModelAttribute Usuario usuario){
         desafioService.saveUser(usuario);
         return "redirect:/usuarios";
@@ -114,7 +114,7 @@ public class DesafioController {
      * Direciona para pagina de calculo de digito unico
      * @return pagina destino
      */
-    @RequestMapping(value = "/calcularDigitoUnico/{id}", method = RequestMethod.GET)
+    @GetMapping(path = {"/calcularDigitoUnico/{id}"})
     public ModelAndView getCalcularDigitoUnicoForm(@PathVariable("id") Long id){
         ModelAndView mv = new ModelAndView( "calcularDigitoUnico");
         mv.addObject("usuarioID", id);
@@ -130,7 +130,7 @@ public class DesafioController {
      * @param attributes
      * @return
      */
-    @RequestMapping(value = "/calcularDigitoUnico/{id}", method = RequestMethod.POST)
+    @PostMapping(value="/calcularDigitoUnico/{id}")
     public ModelAndView calcularUnicoDigito(@Valid @ModelAttribute Calculo calculo, @PathVariable("id") Long usuarioID, BindingResult result, RedirectAttributes attributes){
 
         calculo = processarCalculo(calculo,usuarioID);
@@ -214,7 +214,7 @@ public class DesafioController {
      * @param usuario
      * @return
      */
-    @RequestMapping( value = "/newUsuarioAPI", method = RequestMethod.POST)
+    @PostMapping(value="/newUsuarioAPI")
     public ResponseEntity<Object> salvarUsuarioAPI(@Valid @RequestBody Usuario usuario){
         return saveUserAPI(usuario, false);
     }
@@ -224,18 +224,18 @@ public class DesafioController {
      * @param usuario
      * @return
      */
-    @RequestMapping(value = "/editarUsuarioAPI/{id}", method = RequestMethod.POST)
+    @PostMapping(value="/editarUsuarioAPI/{id}")
     public ResponseEntity<Object> editarUsuarioAPI(@Valid @RequestBody Usuario usuario){
         return saveUserAPI(usuario, true);
     }
 
     /**
-     * 
+     *
      * @param calculo
      * @param usuarioID
      * @return
      */
-    @RequestMapping(value = "/calcularDigitoUnicoAPI/{id}", method = RequestMethod.POST)
+    @PostMapping(value="/calcularDigitoUnicoAPI/{id}")
     public ResponseEntity<Object> calcularUnicoDigito(@Valid @RequestBody Calculo calculo, @PathVariable("id") Long usuarioID){
 
         calculo = processarCalculo(calculo,usuarioID);
