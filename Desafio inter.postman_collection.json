@@ -20,14 +20,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/newUsuario",
+					"raw": "http://localhost:8080/newUsuarioAPI",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"newUsuario"
+						"newUsuarioAPI"
 					]
 				}
 			},
@@ -48,14 +48,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/calcularDigitoUnico/1",
+					"raw": "http://localhost:8080/calcularDigitoUnicoAPI/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"calcularDigitoUnico",
+						"calcularDigitoUnicoAPI",
 						"1"
 					]
 				}
@@ -69,7 +69,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\": \"Teste JSON\",\r\n    \"email\": \"teste.json@json.com.br\"\r\n}",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"nome\": \"Teste EDITAR JSON\",\r\n    \"email\": \"editar.json@json.com.br\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -77,14 +77,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/newUsuario",
+					"raw": "http://localhost:8080/editarUsuarioAPI/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"newUsuario"
+						"editarUsuarioAPI",
+						"1"
 					]
 				}
 			},
@@ -96,7 +97,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:8080/excluirUsuario/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"excluirUsuario",
+						"3"
+					]
 				}
 			},
 			"response": []
