@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "3fe7b378-048e-49bd-8d3f-7fa3416f7076",
+		"name": "Desafio inter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "inserir usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Teste JSON\",\r\n    \"email\": \"teste.json@json.com.br\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/newUsuario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"newUsuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "calcular digito unico",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"numero\": \"9875\",\r\n    \"quantidadeRepeticoes\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/calcularDigitoUnico/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"calcularDigitoUnico",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editar usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Teste JSON\",\r\n    \"email\": \"teste.json@json.com.br\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/newUsuario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"newUsuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "excluir usuario",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
