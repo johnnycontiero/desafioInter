@@ -16,7 +16,6 @@ public class Calculo {
 
     @NotBlank
     @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Usuario usuario;
 
     @NotBlank

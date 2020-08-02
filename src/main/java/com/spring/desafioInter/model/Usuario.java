@@ -1,5 +1,9 @@
 package com.spring.desafioInter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -20,6 +24,8 @@ public class Usuario {
     private String email;
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private List<Calculo> calculos;
 
     public Long getId() {

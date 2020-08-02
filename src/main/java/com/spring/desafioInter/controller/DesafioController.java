@@ -242,8 +242,18 @@ public class DesafioController {
         return new ResponseEntity<>("O digito único calculado foi: " + calculo.getDigitoUnico(), HttpStatus.OK);
     }
 
+    /**
+     *
+     * @param usuarioID
+     * @return
+     */
+    @GetMapping(value="/getCalulosByUsuario/{id}")
+    public ResponseEntity<List<Calculo>> getCalulosByUsuario(@PathVariable("id") Long usuarioID){
 
+        Usuario usuario = desafioService.findUserById(usuarioID);
 
+        return new ResponseEntity<>(usuario.getCalculos(), HttpStatus.OK);
+    }
 
 
 }
