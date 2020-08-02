@@ -1,6 +1,8 @@
 package com.spring.desafioInter.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -10,6 +12,8 @@ import java.util.List;
 
 
 @Entity
+@Setter
+@Getter
 @Table(name="USUARIO")
 public class Usuario {
 
@@ -28,35 +32,4 @@ public class Usuario {
     @JsonIgnore
     private List<Calculo> calculos;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public List<Calculo> getCalculos() {
-        return calculos;
-    }
-
-    public void setCalculos(List<Calculo> calculos) {
-        this.calculos = calculos;
-    }
 }

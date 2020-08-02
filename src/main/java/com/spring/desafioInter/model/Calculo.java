@@ -1,12 +1,14 @@
 package com.spring.desafioInter.model;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import lombok.Setter;
+import lombok.Getter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
+@Setter
+@Getter
 @Table(name="CALCULO")
 public class Calculo {
 
@@ -31,39 +33,5 @@ public class Calculo {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public Long getQuantidadeRepeticoes() {
-        return quantidadeRepeticoes;
-    }
-
-    public void setQuantidadeRepeticoes(Long quantidadeRepeticoes) {
-        this.quantidadeRepeticoes = quantidadeRepeticoes;
-    }
-
-    public Long getDigitoUnico() {
-        return digitoUnico;
-    }
-
-    public void setDigitoUnico(Long digitoUnico) {
-        this.digitoUnico = digitoUnico;
-    }
 }
