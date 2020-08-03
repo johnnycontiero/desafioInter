@@ -5,6 +5,8 @@ import com.spring.desafioInter.model.Usuario;
 import com.spring.desafioInter.service.DesafioService;
 import com.spring.desafioInter.util.CacheCalculos;
 import com.spring.desafioInter.util.CalcularDigitoUnico;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
-
+@Api(value="API Rest")
 @Controller
 public class DesafioController {
 
@@ -80,6 +82,7 @@ public class DesafioController {
      * @param id Identificação do usuário
      * @return redireciona pagina de usuarios
      */
+    @ApiOperation(value="Excluir cadastro do usuário")
     @GetMapping(path = {"/excluirUsuario/{id}"})
     public String getExcluirUsuario(@PathVariable("id") Long id){
         desafioService.deleteUser(id);
@@ -214,6 +217,7 @@ public class DesafioController {
      * @param usuario
      * @return
      */
+    @ApiOperation(value="Inserir cadastro do usuário")
     @PostMapping(value="/newUsuarioAPI")
     public ResponseEntity<Object> salvarUsuarioAPI(@Valid @RequestBody Usuario usuario){
         return saveUserAPI(usuario, false);
@@ -224,6 +228,7 @@ public class DesafioController {
      * @param usuario
      * @return
      */
+    @ApiOperation(value="Editar cadastro do usuário")
     @PostMapping(value="/editarUsuarioAPI/{id}")
     public ResponseEntity<Object> editarUsuarioAPI(@Valid @RequestBody Usuario usuario){
         return saveUserAPI(usuario, true);
@@ -235,6 +240,7 @@ public class DesafioController {
      * @param usuarioID
      * @return
      */
+    @ApiOperation(value="Calcular dígito unico")
     @PostMapping(value="/calcularDigitoUnicoAPI/{id}")
     public ResponseEntity<Object> calcularUnicoDigito(@Valid @RequestBody Calculo calculo, @PathVariable("id") Long usuarioID){
 
@@ -247,6 +253,7 @@ public class DesafioController {
      * @param usuarioID
      * @return
      */
+    @ApiOperation(value="Retorna lista de cálculos do usuário")
     @GetMapping(value="/getCalulosByUsuario/{id}")
     public ResponseEntity<List<Calculo>> getCalulosByUsuario(@PathVariable("id") Long usuarioID){
 
