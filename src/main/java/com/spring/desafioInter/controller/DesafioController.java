@@ -25,8 +25,6 @@ public class DesafioController {
     @Autowired
     DesafioService desafioService;
 
-    CacheCalculos cache = new CacheCalculos();
-
     @GetMapping(path = {"/"})
     public String index(){
         return "redirect:/usuarios";
@@ -136,7 +134,7 @@ public class DesafioController {
     @PostMapping(value="/calcularDigitoUnico/{id}")
     public ModelAndView calcularUnicoDigito(@Valid @ModelAttribute Calculo calculo, @PathVariable("id") Long usuarioID, BindingResult result, RedirectAttributes attributes){
 
-        calculo = processarCalculo(calculo,usuarioID);
+        calculo = desafioService.processarCalculo(calculo,usuarioID);
 
         ModelAndView mv = new ModelAndView( "sucessoCalculo");
         mv.addObject("usuarioID", usuarioID);
@@ -146,73 +144,6 @@ public class DesafioController {
     }
 
     /**
-     * Valida se usuario esta populado
-     * @param usuario
-     * @param isEditar
-     * @return
-     */
-    private boolean isUsuarioOK(Usuario usuario, boolean isEditar){
-
-        if (usuario != null
-                && usuario.getNome() != null
-                && usuario.getEmail() != null) {
-
-            if (isEditar && usuario.getId() == null){
-                return false;
-            }
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Persiste usuario da chamda rest
-     * @param usuario
-     * @param isEditar
-     * @return
-     */
-    private ResponseEntity<Object> saveUserAPI(Usuario usuario, boolean isEditar){
-        if (isUsuarioOK(usuario, isEditar)) {
-            desafioService.saveUser(usuario);
-            return new ResponseEntity<>(usuario, HttpStatus.OK);
-        }
-        else {
-            return new ResponseEntity<>("Request Invalido",HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    /**
-     * Processa o calculo do digito unico
-     * @param calculo
-     * @param usuarioID
-     * @return
-     */
-    private Calculo processarCalculo(Calculo calculo, Long usuarioID){
-
-        Calculo calculoCache = cache.getCalculo(calculo);
-
-        if (calculoCache == null) {
-
-            CalcularDigitoUnico calcularDigito = new CalcularDigitoUnico();
-            Long digitoUnico = calcularDigito.calcular(calculo.getNumero(), calculo.getQuantidadeRepeticoes());
-            calculo.setDigitoUnico(digitoUnico);
-            cache.enfileirar(calculo);
-        }
-        else
-        {
-            calculo = calculoCache;
-        }
-
-        Usuario usuario = desafioService.findUserById(usuarioID);
-        calculo.setUsuario(usuario);
-
-        desafioService.saveCalculo(calculo);
-
-        return  calculo;
-    }
-
-
-    /**
      *
      * @param usuario
      * @return
@@ -220,7 +151,7 @@ public class DesafioController {
     @ApiOperation(value="Inserir cadastro do usuário")
     @PostMapping(value="/newUsuarioAPI")
     public ResponseEntity<Object> salvarUsuarioAPI(@Valid @RequestBody Usuario usuario){
-        return saveUserAPI(usuario, false);
+        return desafioService.saveUserAPI(usuario, false);
     }
 
     /**
@@ -231,7 +162,7 @@ public class DesafioController {
     @ApiOperation(value="Editar cadastro do usuário")
     @PostMapping(value="/editarUsuarioAPI/{id}")
     public ResponseEntity<Object> editarUsuarioAPI(@Valid @RequestBody Usuario usuario){
-        return saveUserAPI(usuario, true);
+        return desafioService.saveUserAPI(usuario, true);
     }
 
     /**
@@ -244,7 +175,7 @@ public class DesafioController {
     @PostMapping(value="/calcularDigitoUnicoAPI/{id}")
     public ResponseEntity<Object> calcularUnicoDigito(@Valid @RequestBody Calculo calculo, @PathVariable("id") Long usuarioID){
 
-        calculo = processarCalculo(calculo,usuarioID);
+        calculo = desafioService.processarCalculo(calculo,usuarioID);
         return new ResponseEntity<>("O digito único calculado foi: " + calculo.getDigitoUnico(), HttpStatus.OK);
     }
 
