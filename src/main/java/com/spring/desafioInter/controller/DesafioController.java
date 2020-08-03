@@ -143,55 +143,6 @@ public class DesafioController {
 
     }
 
-    /**
-     *
-     * @param usuario
-     * @return
-     */
-    @ApiOperation(value="Inserir cadastro do usuário")
-    @PostMapping(value="/newUsuarioAPI")
-    public ResponseEntity<Object> salvarUsuarioAPI(@Valid @RequestBody Usuario usuario){
-        return desafioService.saveUserAPI(usuario, false);
-    }
-
-    /**
-     *
-     * @param usuario
-     * @return
-     */
-    @ApiOperation(value="Editar cadastro do usuário")
-    @PostMapping(value="/editarUsuarioAPI/{id}")
-    public ResponseEntity<Object> editarUsuarioAPI(@Valid @RequestBody Usuario usuario){
-        return desafioService.saveUserAPI(usuario, true);
-    }
-
-    /**
-     *
-     * @param calculo
-     * @param usuarioID
-     * @return
-     */
-    @ApiOperation(value="Calcular dígito unico")
-    @PostMapping(value="/calcularDigitoUnicoAPI/{id}")
-    public ResponseEntity<Object> calcularUnicoDigito(@Valid @RequestBody Calculo calculo, @PathVariable("id") Long usuarioID){
-
-        calculo = desafioService.processarCalculo(calculo,usuarioID);
-        return new ResponseEntity<>("O digito único calculado foi: " + calculo.getDigitoUnico(), HttpStatus.OK);
-    }
-
-    /**
-     *
-     * @param usuarioID
-     * @return
-     */
-    @ApiOperation(value="Retorna lista de cálculos do usuário")
-    @GetMapping(value="/getCalulosByUsuario/{id}")
-    public ResponseEntity<List<Calculo>> getCalulosByUsuario(@PathVariable("id") Long usuarioID){
-
-        Usuario usuario = desafioService.findUserById(usuarioID);
-
-        return new ResponseEntity<>(usuario.getCalculos(), HttpStatus.OK);
-    }
 
 
 }

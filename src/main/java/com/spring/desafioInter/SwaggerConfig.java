@@ -24,7 +24,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.spring.desafioInter"))
-                //.paths(regex("/*"))
+                .paths(regex("/desafio.*"))
                 .build()
                 .apiInfo(metaInfo());
     }
