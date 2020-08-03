@@ -1,5 +1,6 @@
 package com.spring.desafioInter.model;
 
+import lombok.EqualsAndHashCode;
 import lombok.Setter;
 import lombok.Getter;
 
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Setter
 @Getter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name="CALCULO")
 public class Calculo {
 
@@ -21,17 +23,15 @@ public class Calculo {
     private Usuario usuario;
 
     @NotBlank
+    @EqualsAndHashCode.Include
     private String numero;
 
     @NotBlank
+    @EqualsAndHashCode.Include
     private Long quantidadeRepeticoes;
 
     @NotBlank
     private Long digitoUnico;
-
-    public Long getId() {
-        return id;
-    }
 
 
 }

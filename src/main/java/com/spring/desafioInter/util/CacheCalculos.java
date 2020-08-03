@@ -2,6 +2,8 @@ package com.spring.desafioInter.util;
 
 import com.spring.desafioInter.model.Calculo;
 
+import java.util.Arrays;
+
 public class CacheCalculos {
 
     public CacheCalculos() {
@@ -32,8 +34,14 @@ public class CacheCalculos {
             desenfileirar();
         }
 
-        calculosRealizados[tamanho] = calculo;
-        tamanho++;
+        if (Arrays.stream(calculosRealizados)
+                .filter(c -> (c != null && c.equals(calculo)))
+                .map(c -> Boolean.FALSE)
+                .findAny()
+                .orElse(Boolean.TRUE)) {
+            calculosRealizados[tamanho] = calculo;
+            tamanho++;
+        }
     }
 
     public Calculo getCalculo(Calculo calculo){
@@ -49,8 +57,7 @@ public class CacheCalculos {
                 calculoRetorno = calculosRealizados[i];
 
                 if (calculoRetorno != null
-                        && calculo.getNumero().equals(calculoRetorno.getNumero())
-                        && calculo.getQuantidadeRepeticoes().equals(calculoRetorno.getQuantidadeRepeticoes())) {
+                        && calculo.equals(calculoRetorno)) {
                     return calculoRetorno;
                 }
             }
